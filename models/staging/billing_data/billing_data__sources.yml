@@ -1,0 +1,68 @@
+version: 2
+
+sources:
+  - name: billing_data
+    tables:
+      - name: invoice
+        columns:
+          - name: invoice_id
+            description: This is the primary key. ID of an invoice
+            tests:
+              - unique
+              - not_null
+                  
+          - name: customer_id
+            description: This is the Foreign key. ID of a customer
+            tests:
+              - not_null
+
+      - name: invoice_item
+        freshness: 
+          warn_after:
+            count: 24
+            period: hour
+        loaded_at_field: _synced
+        
+        columns:
+          - name: id
+            description: This is the Primary key. ID of an invoice item
+            tests:
+              - unique
+              - not_null
+                  
+          - name: invoice_id
+            description: This is the Foreign key. ID of an invoice
+            tests:
+              - not_null
+              - relationships:
+                  field: invoice_id
+                  to: source('billing_data', 'invoice')
+
+          - name: type
+            description: This is the Invoice item type
+
+          - name: period_end
+            description: Invoice line item end date. This invoice item pays for a period ending on this date.
+
+          - name: period_start
+            description: Invoice line item start date. This invoice item pays for a period starting on this date.
+
+          - name: amount
+            description: Invoice item amount
+
+          - name: currency
+            description: Currency of the invoice item amount
+            tests:
+              - accepted_values:
+                  values: ['dkk', 'eur', 'gbp', 'sek']
+                    
+
+          - name: _synced
+            description: Timestamp of when the raw data was lasted synced in the database
+            
+          
+
+  
+
+
+      
