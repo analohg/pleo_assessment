@@ -40,6 +40,9 @@ sources:
 
           - name: type
             description: This is the Invoice item type
+            tests:
+              - accepted_values:
+                  values: ['invoiceitem', 'subscription']
 
           - name: period_end
             description: Invoice line item end date. This invoice item pays for a period ending on this date.
