@@ -4,7 +4,7 @@
 
 For my model structure, I built  3 folders:
 
-- staging: This houses all the source data. I also create a sub-folder "billing_data" to group my sources appropriately. In this case, data from billing will go on billing_data. If I had data from marketing tools like Google Analytics, this would go under a new sub-folder like "marketing"
+- Staging: This houses all the source data. I also create a sub-folder "billing_data" to group my sources appropriately. In this case, data from billing will go on billing_data. If I had data from marketing tools like Google Analytics, this would go under a new sub-folder like "marketing"
 
 - Intermediate: This houses all my transformations. In this instance, I have created a model "int_invoice_amount_converted_to_eur" that converts the amount field from the invoice_item model into euros
 
